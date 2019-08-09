@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+import Navbar from '../components/Navbar';
+import '../stylesheet/navbar.scss'
 
-export default class CategoryPage extends Component {
+
+class CategoryPage extends Component {
 
     loginButton = () => {
         return localStorage.token ? null : <button onClick={this.handleClick}>Login</button>;
@@ -22,10 +26,17 @@ export default class CategoryPage extends Component {
         return (
             <div>
                 <h3>This is CategoryPage</h3>
-                <h3>Welcome {this.props.currentUser.name}</h3>
+                <h3>Welcome {this.props.current_user ? this.props.current_user.name : ""}</h3>
                 {this.loginButton()}
                 {this.signUpButton()}
             </div>
         )
     }
 }
+
+
+    const mapStateToProps = state => ({
+        current_user: state
+    })
+
+export default connect(mapStateToProps)(CategoryPage)

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+import {userPostFetch} from '../redux/actions';
 
-export default class SignUp extends Component {
+class SignUp extends Component {
     
     state = {
         name: "",
@@ -16,27 +18,27 @@ export default class SignUp extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        console.log(this.state)
-
-        fetch('http://localhost:3000/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json',
-                'Accept':'application/json'
-              },
-              body: JSON.stringify(this.state)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.token) {
-                localStorage.token = data.token
-                this.props.history.goBack()
-            }
-        });
+        this.props.userPostFetch(this.state)
+        this.props.history.push('/')
+        // fetch('http://localhost:3000/signup', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type':'application/json',
+        //         'Accept':'application/json'
+        //       },
+        //       body: JSON.stringify(this.state)
+        // })
+        // .then(res => res.json())
+        // .then(data => {
+        //     if (data.token) {
+        //         localStorage.token = data.token
+        //         this.props.history.goBack()
+        //     }
+        // });
         
     }
     render() {
-        // console.log(this.state.email)
+        console.log(this.props)
         
         return (
             <div>
@@ -50,3 +52,14 @@ export default class SignUp extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return { user: state }
+}
+
+const mapDispatchToProps = dispatch => ({
+    userPostFetch: userInfo => dispatch(userPostFetch(userInfo))
+})
+
+
+export default connect(null, mapDispatchToProps)(SignUp)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import './App.css';
 import { Switch, Route } from 'react-router-dom'
 import Home from './containers/Home'
@@ -11,48 +11,41 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './containers/Profile';
 import OhhPageNotFount from './components/OhhPageNotFount'
-import { createStore } from 'redux'
+import { connect } from 'react-redux'
+import {getProfileFetch} from './redux/actions';
+import Navbar from './components/Navbar';
 
-console.log(createStore)
+class App extends Component {
 
-const store = createStore((preveState) => {
-    return { current_user: "Yonas", foo: "bar"}
-})
-debugger
+  // state = {
+  //   current_user: {}
+  // }
 
-export default class App extends Component {
-
-  state = {
-    current_user: {}
-  }
-
-  clearCurrentUser = () => {
-    this.setState({
-      current_user: {}
-    })
-  }
+  // clearCurrentUser = () => {
+  //   this.setState({
+  //     current_user: {}
+  //   })
+  // }
 
   componentDidMount() {
     if (localStorage.token) {
-      fetch('http://localhost:3000/profile', {
-        headers: {
-          Authorization: localStorage.token
-        }
-      })
-      .then(res => res.json())
-      .then(profileData => this.setState({current_user: profileData}
-))
+      this.props.getProfileFetch()
 
     }
-  }
+  
+}
 
 
 
   render() {
-    console.log(this.state.current_user)
+    console.log(this.props)
     
     return (
+        <Fragment>
+
+          <Navbar />
         <Switch>
+  
           {/* <Route path='/login' component={Login}/> */}
 
           <Route 
@@ -61,7 +54,7 @@ export default class App extends Component {
               return (
                 <Login 
                   {...routerProps}
-                  currentUser={this.state.current_user}
+                  
                 />
               )
             }}
@@ -87,7 +80,7 @@ export default class App extends Component {
               return (
                 <CategoryPage 
                   {...routerProps}
-                  currentUser={this.state.current_user}
+                  
                 />
               )
             }}
@@ -100,7 +93,7 @@ export default class App extends Component {
               return (
                 <ProductPage 
                   {...routerProps}
-                  currentUser={this.state.current_user}
+                  
                 />
               )
             }}
@@ -113,7 +106,7 @@ export default class App extends Component {
               return (
                 <Cart 
                   {...routerProps}
-                  currentUser={this.state.current_user}
+                  
                 />
               )
             }}
@@ -128,7 +121,7 @@ export default class App extends Component {
               return (
                 <Home 
                   {...routerProps}
-                  currentUser={this.state.current_user}
+                  
                   clearCurrentUser={this.clearCurrentUser}
                 />
               )
@@ -138,8 +131,17 @@ export default class App extends Component {
         
           <Route component={OhhPageNotFount} />
         </Switch>
+      </Fragment>
     )
   }
 }
 
+// const mapStateToProps = (state, props) => {
+//     return { current_user: state.current_user}
+// }
 
+const mapDispatchToProps = dispatch => ({
+  getProfileFetch: () => dispatch(getProfileFetch())
+})
+
+export default connect(null, mapDispatchToProps)(App) 

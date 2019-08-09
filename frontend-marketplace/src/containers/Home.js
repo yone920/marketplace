@@ -1,7 +1,9 @@
-
 import React, { Component } from 'react'
+import {logoutUser} from '../redux/actions';
+import {connect} from 'react-redux';
 
-export default class Home extends Component {
+
+class Home extends Component {
 
     
     loginButton = () => {
@@ -24,8 +26,9 @@ export default class Home extends Component {
     }
     handleSignOutClick = event => {
         localStorage.clear()
+        this.props.logoutUser()
         this.props.history.push('./')
-        this.props.clearCurrentUser()
+        // this.props.clearCurrentUser()
     }
 
     render() {
@@ -33,7 +36,7 @@ export default class Home extends Component {
         return (
             <div>
                 <p>Home Page</p>
-                <h3>Welcome {this.props.currentUser.name}</h3>
+                <h3>Welcome {this.props.current_user ? this.props.current_user.name : ""}</h3>
                 {this.loginButton()}
                 {this.signUpButton()}
                 {this.signOutButton()}
@@ -41,3 +44,15 @@ export default class Home extends Component {
         )
     }
 }
+
+    const mapStateToProps = state => ({
+        current_user: state
+    })
+
+    const mapDispatchToProps = dispatch => ({
+        logoutUser: () => dispatch(logoutUser())
+
+    })
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

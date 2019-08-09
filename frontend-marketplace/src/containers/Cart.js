@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
 
-export default class Cart extends Component {
+class Cart extends Component {
 
 
     loginButton = () => {
@@ -20,10 +21,17 @@ export default class Cart extends Component {
         return (
             <div>
                 <h3>This is Cart</h3>
-                <h3>Welcome {this.props.currentUser.name}</h3>
+                <h3>Welcome {this.props.current_user ? this.props.current_user.name : ""}</h3>
                 {this.loginButton()}
                 {this.signUpButton()}
             </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    current_user: state
+})
+
+
+export default connect(mapStateToProps)(Cart)

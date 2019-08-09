@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+import {userLoginFetch} from '../redux/actions';
 
-export default class Login extends Component {
+
+class Login extends Component {
 
     state = {
         email: "",
@@ -15,22 +18,9 @@ export default class Login extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json',
-                'Accept':'application/json'
-              },
-              body: JSON.stringify(this.state)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.token) {
-                localStorage.token = data.token
-                
-                this.props.history.goBack()
-            }
-        });
+        this.props.userLoginFetch(this.state)
+        this.props.history.push('/')
+      
         // this.props.grabLoginInfo(this.state)
     }
     render() {  
@@ -47,3 +37,9 @@ export default class Login extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    userLoginFetch: userInfo => dispatch(userLoginFetch(userInfo))
+})
+
+export default connect(null, mapDispatchToProps)(Login)
