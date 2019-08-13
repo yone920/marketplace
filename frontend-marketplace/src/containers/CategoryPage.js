@@ -1,34 +1,25 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import Navbar from '../components/Navbar';
-import '../stylesheet/navbar.scss'
 
+import '../stylesheet/navbar.scss'
+import ProductList from './ProductList'
 
 class CategoryPage extends Component {
 
-    loginButton = () => {
-        return localStorage.token ? null : <button onClick={this.handleClick}>Login</button>;
-    }
-    
-    handleClick = event => {
-        this.props.history.push('./login')
+    mapOverProducts = () => {        
+        return this.props.category.products.map((product) => {
+            return <ProductList history={this.props.history} product={product} />
+        })
     }
 
-    signUpButton = () => {
-        return localStorage.token ? null : <button onClick={this.handleSignUpClick}>Signup</button>;
-    }
-    handleSignUpClick = event => {
-            this.props.history.push('./signup')
-    }
+
     render() {
         console.log(this.props)
         
         return (
             <div>
-                <h3>This is CategoryPage</h3>
-                <h3>Welcome {this.props.current_user ? this.props.current_user.name : ""}</h3>
-                {this.loginButton()}
-                {this.signUpButton()}
+                {this.mapOverProducts()}
+                
             </div>
         )
     }
@@ -36,7 +27,8 @@ class CategoryPage extends Component {
 
 
     const mapStateToProps = state => ({
-        current_user: state
+        // current_site_user: state
+        category: state.categories.category
     })
 
 export default connect(mapStateToProps)(CategoryPage)

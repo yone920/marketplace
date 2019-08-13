@@ -7,7 +7,7 @@ class Navbar extends Component {
 
     // Controls login button
     loginButton = () => {
-        return localStorage.token ? null : <li ><a onClick={this.handleClick}>Login</a></li>;
+        return localStorage.token ? null : <li ><a  onClick={this.handleClick}>Login</a></li>;
     }
     handleClick = event => {
         this.props.history.push('./login')
@@ -32,6 +32,10 @@ class Navbar extends Component {
         // this.props.clearCurrentUser()
     }
 
+    handleCartClick = event => {
+        this.props.history.push('./cart')
+    }
+
     
 
 
@@ -44,8 +48,9 @@ class Navbar extends Component {
                     {this.loginButton()}
                     {this.signUpButton()}
                     
-                    {this.props.current_user.name ? <li className="username">Welcome {this.props.current_user.name}</li> : null }
+                    {this.props.current_site_user.name ? <li className="username">Welcome {this.props.current_site_user.name}</li> : null }
                     {this.signOutButton()}
+                    <li><a onClick={this.handleCartClick} href="#news">Cart</a></li>
                 </ul>
             </div>
         )
@@ -54,7 +59,7 @@ class Navbar extends Component {
 
 
 const mapStateToProps = state => ({
-    current_user: state
+    current_site_user: state.current_site_user
 })
 
 const mapDispatchToProps = dispatch => ({

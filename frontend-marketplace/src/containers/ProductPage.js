@@ -1,29 +1,46 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { addToCart } from '../redux/actions';
 
-export default class ProductPage extends Component {
+class ProductPage extends Component {
 
-    loginButton = () => {
-        return localStorage.token ? null : <button onClick={this.handleClick}>Login</button>;
+    state = {
+        product: this.props.product.product,
+        user: this.props.user,
+        quantity: 0
     }
-    handleClick = event => {
-        this.props.history.push('./login')
+
+    handleChange = event => {
+        this.setState({quantity: event.target.value})
     }
-    signUpButton = () => {
-        return localStorage.token ? null : <button onClick={this.handleSignUpClick}>Signup</button>;
+
+    handleSubmit = event => {
+        event.preventDefault()
+        this.props.addToCart(this.state)
     }
-    handleSignUpClick = event => {
-        this.props.history.push('./signup')
-    }
-    
 
     render() {
+         
         return (
             <div>
-                <h3>This is Product page!!</h3>
-                <h3>Welcome {this.props.currentUser.name}</h3>
-                {this.loginButton()}
-                {this.signUpButton()}
+            <h3>{this.props.product.product.name}</h3>
+            {/* <button onClick={this.handleClick}>Add To Cart</button> */}
+            <form onSubmit={this.handleSubmit}>
+                <button type="submit">Add To Cart</button>
+                <input type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange}></input>
+            </form>
             </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    product: state.product,
+    user: state.current_site_user
+})
+
+const mapDispatchToProps = dispatch => ({
+    addToCart: (singleProduct) => dispatch(addToCart(singleProduct))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Profile extends Component {
 
     state = {
-        current_user: {}
+        current_site_user: {}
     }
     componentDidMount() {
         if (!localStorage.token) {

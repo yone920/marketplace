@@ -11,13 +11,20 @@ class UsersController < ApplicationController
     end
 
     def profile
-        render json: current_user
+        render json: current_site_user
     end
     
+    def update 
+        # byebug
+        user = User.find_by(id: params[:id])
+        user.current_order = params[:current_order]
+        user.save
+        render json: user
+    end
     
     private
     def user_params
-        params.permit(:name, :email, :password, :admin)
+        params.permit(:name, :email, :password, :admin, :current_order)
     end
     
 end

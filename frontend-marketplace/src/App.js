@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './containers/Home'
 import ProductPage from './containers/ProductPage'
 import CategoryPage from './containers/CategoryPage'
-import Cart from './containers/Cart'
+import CartList from './containers/Cart'
 import CheckOut from './containers/CheckOut'
 import ReportPage from './containers/ReportPage'
 import Login from './components/Login';
@@ -12,34 +12,19 @@ import SignUp from './components/SignUp';
 import Profile from './containers/Profile';
 import OhhPageNotFount from './components/OhhPageNotFount'
 import { connect } from 'react-redux'
-import {getProfileFetch} from './redux/actions';
+import {getProfileFetch, fetchCategories, fetchProducts} from './redux/actions';
 import Navbar from './components/Navbar';
 
 class App extends Component {
-
-  // state = {
-  //   current_user: {}
-  // }
-
-  // clearCurrentUser = () => {
-  //   this.setState({
-  //     current_user: {}
-  //   })
-  // }
-
   componentDidMount() {
+    this.props.fetchCategories()
+    this.props.fetchProducts()
     if (localStorage.token) {
       this.props.getProfileFetch()
-
     }
-  
 }
 
-
-
-  render() {
-    console.log(this.props)
-    
+  render() {    
     return (
         <Fragment>
 
@@ -104,7 +89,7 @@ class App extends Component {
             path='/cart' 
             render={(routerProps) => {
               return (
-                <Cart 
+                <CartList
                   {...routerProps}
                   
                 />
@@ -140,8 +125,10 @@ class App extends Component {
 //     return { current_user: state.current_user}
 // }
 
-const mapDispatchToProps = dispatch => ({
-  getProfileFetch: () => dispatch(getProfileFetch())
-})
+const mapDispatchToProps = {
+getProfileFetch: getProfileFetch,
+fetchCategories: fetchCategories,
+fetchProducts: fetchProducts
+}
 
 export default connect(null, mapDispatchToProps)(App) 

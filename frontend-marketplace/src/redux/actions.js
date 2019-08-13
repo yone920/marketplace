@@ -25,7 +25,10 @@ const loginUser = userObj => ({
 })
 
 
+
 export const userLoginFetch = user => {
+    console.log(user)
+    
     return dispatch => {
         return fetch('http://localhost:3000/login', {
                 method: 'POST',
@@ -40,6 +43,8 @@ export const userLoginFetch = user => {
                 if (data.token) {
                     localStorage.token = data.token
                     dispatch(loginUser(data.user))
+                    console.log(data);
+                    
                     // this.props.history.goBack()
                 }
             });
@@ -68,3 +73,87 @@ export const getProfileFetch = () => {
 export const logoutUser = () => ({
     type: 'LOGOUT_USER'
 })
+
+
+export const fetchCategories = () => dispatch => {
+    fetch('http://localhost:3000/categories')
+        .then(res => res.json())
+        .then(categoriesJson => {
+            dispatch({ type: "GET_CURRENT_CATEGORIES", categories: categoriesJson})
+            
+        })
+}
+
+// export const fetchedCategories = () => {
+//     GET_CURRENT_CATEGORIES
+// }
+
+// export const addToCart = (cartData) => dispatch => {
+//     dispatch({ type: 'ADD_TO_CART', data: cartData })
+// }
+
+export const fetchProducts = () => dispatch => {
+    fetch('http://localhost:3000/products')
+        .then(res => res.json())
+        .then(productsJson => {
+            dispatch({ type: "GET_CURRENT_PRODUCTS", products: productsJson})
+            
+        })
+}
+
+
+export const grapSingleCategoy = (singleCategory) => dispatch => {
+    dispatch({ type: "GET_SINGLE_CATEGORY", category: singleCategory })
+}
+
+
+export const grabSingleProduct = (singleProduct) => dispatch => {
+    dispatch({ type: "GET_SINGLE_PRODUCT", product: singleProduct})
+}
+
+
+
+// Add to cart action //
+export const addToCart = data => dispatch => {
+    console.log(data)
+    const userId = data.user.id  
+    const currentOrder = data.user.current_order
+    const productId = data.product.id
+    console.log(userId)
+
+    if (currentOrder === null) {
+        let config = {
+            method: "POST",
+            headers: {
+              'Content-Type':'application/json',
+              'Accept':'application/json'
+            },
+            body: JSON.stringify({user_id: userId})
+          }
+        
+        fetch("http://localhost:3000/orders", config)
+            .then(rsp => rsp.json())
+            .then(data => updateNewOrder(data))            
+    }
+
+
+    const updateNewOrder = data => {
+        console.log(data);
+        dispatch({ type: "NEW_ORDER", cart: data})
+
+        let config = {
+            method: "PATCH",
+            headers: {
+              'Content-Type':'application/json',
+              'Accept':'application/json'
+            },
+            body: JSON.stringify({current_order: data.id})
+          }
+          fetch(`http://localhost:3000/users/${userId}`, config)
+            .then(rsp => rsp.json())
+            .then(data => dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}))
+    }
+}
+
+
+

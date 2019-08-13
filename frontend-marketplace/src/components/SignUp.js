@@ -20,21 +20,6 @@ class SignUp extends Component {
         event.preventDefault()
         this.props.userPostFetch(this.state)
         this.props.history.push('/')
-        // fetch('http://localhost:3000/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type':'application/json',
-        //         'Accept':'application/json'
-        //       },
-        //       body: JSON.stringify(this.state)
-        // })
-        // .then(res => res.json())
-        // .then(data => {
-        //     if (data.token) {
-        //         localStorage.token = data.token
-        //         this.props.history.goBack()
-        //     }
-        // });
         
     }
     render() {
@@ -53,9 +38,6 @@ class SignUp extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return { user: state }
-}
 
 const mapDispatchToProps = dispatch => ({
     userPostFetch: userInfo => dispatch(userPostFetch(userInfo))

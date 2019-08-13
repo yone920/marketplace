@@ -11,12 +11,10 @@ export default function reducer(state = initialState, action) {
         case 'LOGOUT_USER':
             return {}
         
+        case 'UPDATE_CURRENT_USER':
+            return action.current_site_user
+
         default:
             return state
     }
 }
-
-// combineReducers({
-//     user: userReducers
-// })
-

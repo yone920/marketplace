@@ -11,14 +11,14 @@ Product.destroy_all
 Category.destroy_all
 
 
-30.times do
-    Product.create(name: Faker::Commerce.product_name, description: Faker::Vehicle.vin, price: rand(1..200), main_image: Faker::Commerce.department, quantity: rand(20..50), featured: [true, false].sample )
+40.times do
+    Product.create(name: Faker::Book.title, description: Faker::Lorem.paragraph(sentence_count: 7), price: rand(1..200), main_image: Faker::Commerce.department, quantity: rand(20..50), featured: [true, false].sample )
 end
   puts "happy Product seeding"
 
 
-5.times do
-    Category.create(name: Faker::Commerce.department, image: Faker::Commerce.department )
+10.times do
+    Category.create(name: Faker::Book.genre, image: Faker::Commerce.department )
 end
   puts "happy Product seeding"
 
@@ -26,7 +26,7 @@ end
   products = Product.all
 
 products.each do |product|
-    ProductCategory.create(product: product , category_id: rand(0..4))
+    ProductCategory.create(product: product , category_id: rand(0..9))
 end
 
 puts "happy Category Seeding"

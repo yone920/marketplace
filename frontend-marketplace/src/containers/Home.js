@@ -1,52 +1,33 @@
 import React, { Component } from 'react'
 import {logoutUser} from '../redux/actions';
 import {connect} from 'react-redux';
+import CategoryList from '../components/CategoryList'
 
 
 class Home extends Component {
 
     
-    loginButton = () => {
-        return localStorage.token ? null : <button onClick={this.handleLoginClick}>Login</button>;
+
+    mapOverCategories = () => {        
+        return this.props.categories.categories.map((category) => {
+            return <CategoryList key={category.id} history={this.props.history} category={category} />
+        })
     }
 
-    signUpButton = () => {
-        return localStorage.token ? null : <button onClick={this.handleSignUpClick}>Signup</button>;
-    }
-    signOutButton = () => {
-        return localStorage.token ? <button onClick={this.handleSignOutClick}>Signout</button> : null ;
-    }
+   
     
-    handleLoginClick = event => {
-        this.props.history.push('./login')
-    }
-
-    handleSignUpClick = event => {
-        this.props.history.push('./signup')
-    }
-    handleSignOutClick = event => {
-        localStorage.clear()
-        this.props.logoutUser()
-        this.props.history.push('./')
-        // this.props.clearCurrentUser()
-    }
-
-    render() {
-        console.log(this.props)
+    render() {        
         return (
             <div>
-                <p>Home Page</p>
-                <h3>Welcome {this.props.current_user ? this.props.current_user.name : ""}</h3>
-                {this.loginButton()}
-                {this.signUpButton()}
-                {this.signOutButton()}
+                {this.mapOverCategories()}
             </div>
         )
     }
 }
 
     const mapStateToProps = state => ({
-        current_user: state
+        current_site_user: state,
+        categories: state.categories
     })
 
     const mapDispatchToProps = dispatch => ({
