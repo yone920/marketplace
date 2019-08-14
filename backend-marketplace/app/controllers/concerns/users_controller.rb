@@ -10,6 +10,12 @@ class UsersController < ApplicationController
         end
     end
 
+    def show 
+        user_id = params[:id].to_i
+        user = User.find_by_id(user_id)
+        render json: user, include: '**'
+    end
+
     def profile
         render json: current_site_user
     end

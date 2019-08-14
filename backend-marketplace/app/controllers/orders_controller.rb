@@ -5,6 +5,13 @@ class OrdersController < ApplicationController
         render json: orders
     end
 
+    def show 
+        # debugger
+        order_id = params[:id].to_i
+        order = Order.find_by_id(order_id)
+        render json: order, include: '**'
+    end
+
     def create
         # debugger
         order = Order.create(order_params)

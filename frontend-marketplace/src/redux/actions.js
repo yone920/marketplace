@@ -5,8 +5,8 @@ export const userPostFetch = user => {
                 headers: {
                     'Content-Type':'application/json',
                     'Accept':'application/json'
-                  },
-                  body: JSON.stringify(user)
+                },
+                body: JSON.stringify(user)
             })
             .then(res => res.json())
             .then(data => {
@@ -113,47 +113,98 @@ export const grabSingleProduct = (singleProduct) => dispatch => {
 
 
 
+
+
+
+
+
+
+
+
+
 // Add to cart action //
 export const addToCart = data => dispatch => {
     console.log(data)
     const userId = data.user.id  
     const currentOrder = data.user.current_order
     const productId = data.product.id
-    console.log(userId)
+    let quantity = data.quantity
+    console.log(quantity)
 
     if (currentOrder === null) {
+        // Create new Order
         let config = {
+            method: "POST",
+            headers: {
+                'Content-Type':'application/json',
+                'Accept':'application/json'
+            },
+            body: JSON.stringify({user_id: userId})
+        }
+        
+        fetch("http://localhost:3000/orders", config)
+            .then(rsp => rsp.json())
+            .then(data => updateNewOrder(data, productId, quantity)) 
+        
+
+    } else {
+        let config3 = {
             method: "POST",
             headers: {
               'Content-Type':'application/json',
               'Accept':'application/json'
             },
-            body: JSON.stringify({user_id: userId})
+            body: JSON.stringify({order_id: currentOrder, product_id: productId, quantity: quantity})
           }
         
-        fetch("http://localhost:3000/orders", config)
+        fetch("http://localhost:3000/order_items", config3)
             .then(rsp => rsp.json())
-            .then(data => updateNewOrder(data))            
+            .then(data => console.log(data)) 
     }
 
 
-    const updateNewOrder = data => {
-        console.log(data);
-        dispatch({ type: "NEW_ORDER", cart: data})
-
-        let config = {
-            method: "PATCH",
+    // Calleback from if currentOrder === NULL
+    const updateNewOrder = (data, productId, quantity) => {
+        console.log(quantity);
+        
+        
+        //create order Item
+        let config2 = {
+            method: "POST",
             headers: {
-              'Content-Type':'application/json',
-              'Accept':'application/json'
+                'Content-Type':'application/json',
+                'Accept':'application/json'
             },
-            body: JSON.stringify({current_order: data.id})
-          }
-          fetch(`http://localhost:3000/users/${userId}`, config)
+            body: JSON.stringify({order_id: data.id, product_id: productId, quantity: quantity})
+        }
+        
+        fetch("http://localhost:3000/order_items", config2)
+        // .then(rsp => rsp.json())
+        // .then(data => console.log(data)) 
+        
+
+        // Fetch for the Order and update cart state
+        console.log(data);
+        fetch(`http://localhost:3000/orders/${data.id}`)
             .then(rsp => rsp.json())
-            .then(data => dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}))
+            .then(orderJson => console.log(orderJson))
+        // dispatch({ type: "NEW_ORDER", cart: data})
     }
+
 }
 
 
 
+
+        // Set current order attribute of the current site user 
+        // let config = {
+        //     method: "PATCH",
+        //     headers: {
+        //       'Content-Type':'application/json',
+        //       'Accept':'application/json'
+        //     },
+        //     body: JSON.stringify({current_order: data.id})
+        //   }
+        //   fetch(`http://localhost:3000/users/${userId}`, config)
+        //     .then(rsp => rsp.json())
+        //     .then(data => dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}))
