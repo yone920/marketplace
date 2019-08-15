@@ -17,7 +17,6 @@ class Login extends Component {
     }
 
     handleSubmit = event => {
-        console.log(this.state)
         
         event.preventDefault()
         this.props.userLoginFetch(this.state)
@@ -25,9 +24,7 @@ class Login extends Component {
       
         // this.props.grabLoginInfo(this.state)
     }
-    render() {  
-        console.log(this.props)
-              
+    render() {                
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>

@@ -11,7 +11,6 @@ class ProductList extends Component {
     handleClick = () => {
         this.props.grabSingleProduct(this.props)
         this.props.history.push("/product")
-        console.log(this.props)
     }
 
     render() {

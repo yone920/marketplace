@@ -16,9 +16,7 @@ export default class Profile extends Component {
     }
 
 
-    render() {
-        console.log(this.props)
-        
+    render() {        
         return (
             <div>
                 <h3>This is profile</h3>

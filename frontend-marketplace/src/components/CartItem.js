@@ -8,9 +8,7 @@ class CartItem extends Component {
         
     }
 
-    render() {
-        console.log(this.props);
-        
+    render() {        
         return (
             <div>
                 <h5>{this.props.item.name}</h5>

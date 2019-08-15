@@ -7,9 +7,6 @@ import ProductList from './ProductList'
 class CategoryPage extends Component {
 
     mapOverProducts = () => {  
-        console.log(this.props.category.products);
-        console.log(this.props.state);
-         
         if  (this.props.category.products) {
         return this.props.category.products.map((product) => {
             return <ProductList history={this.props.history} product={product} />
@@ -18,9 +15,7 @@ class CategoryPage extends Component {
     }
 
 
-    render() {
-        console.log(this.props)
-        
+    render() {        
         return (
             <div>
                 {this.mapOverProducts()}

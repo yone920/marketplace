@@ -6,7 +6,7 @@ class ProductPage extends Component {
 
     state = {
         product: this.props.product.product,
-        user: this.props.user,
+        // user: this.props.user,
         quantity: 0
     }
 
@@ -16,7 +16,7 @@ class ProductPage extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        this.props.addToCart(this.state)
+        this.props.addToCart({...this.state, user: this.props.user})        
     }
 
     render() {
@@ -41,6 +41,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addToCart: (singleProduct) => dispatch(addToCart(singleProduct))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)
