@@ -74,7 +74,7 @@ export const logoutUser = () => ({
     type: 'LOGOUT_USER'
 })
 
-
+// Fetch categories and set the state
 export const fetchCategories = () => dispatch => {
     fetch('http://localhost:3000/categories')
         .then(res => res.json())
@@ -145,7 +145,7 @@ export const addToCart = data => dispatch => {
         fetch("http://localhost:3000/orders", config)
             .then(rsp => rsp.json())
             .then(data => updateNewOrder(data, productId, quantity)) 
-        
+         
 
     } else {
         let config3 = {
@@ -167,8 +167,26 @@ export const addToCart = data => dispatch => {
     const updateNewOrder = (data, productId, quantity) => {
         console.log(quantity);
         
+        // Update current-user current order attribute
+        let config = {
+            method: "PATCH",
+            headers: {
+                'Content-Type':'application/json',
+                'Accept':'application/json'
+            },
+            body: JSON.stringify({"current_order": data.id})
+        }
         
-        //create order Item
+        fetch(`http://localhost:3000/users/${userId}`, config)
+            .then(rsp => rsp.json())
+            .then(userJson => 
+                dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: userJson})
+                )
+
+            
+
+
+        //create order_Item
         let config2 = {
             method: "POST",
             headers: {
@@ -179,17 +197,19 @@ export const addToCart = data => dispatch => {
         }
         
         fetch("http://localhost:3000/order_items", config2)
-        // .then(rsp => rsp.json())
-        // .then(data => console.log(data)) 
+        .then(rsp => rsp.json())
+        .then(data => console.log(data)) 
         
 
         // Fetch for the Order and update cart state
-        console.log(data);
+        // console.log(data);
         fetch(`http://localhost:3000/orders/${data.id}`)
             .then(rsp => rsp.json())
             .then(orderJson => console.log(orderJson))
         // dispatch({ type: "NEW_ORDER", cart: data})
     }
+
+
 
 }
 

@@ -2,7 +2,8 @@ class OrderItemsController < ApplicationController
     def create
         # byebug
         orderItem = OrderItem.create(order_item_params)
-        render json: orderItem, include: "**"
+        render json: orderItem.order
+        # , include: "**"
     end
 
     private

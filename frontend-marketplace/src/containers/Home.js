@@ -8,10 +8,12 @@ class Home extends Component {
 
     
 
-    mapOverCategories = () => {        
+    mapOverCategories = () => {   
+        if  (this.props.categories.categories) { 
         return this.props.categories.categories.map((category) => {
             return <CategoryList key={category.id} history={this.props.history} category={category} />
         })
+    }
     }
 
    

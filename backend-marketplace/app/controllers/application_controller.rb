@@ -5,7 +5,8 @@ class ApplicationController < ActionController::API
     end
 
     def secret 
-        Rails.application.credentials.jwt_secret
+        'nabimysecret'
+        # Rails.application.credentials.jwt_secret
     end
 
     def token
