@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import { grapSingleCategoy } from '../redux/actions'
 
 class CategoryList extends Component {
     
     handleClick = event => {
-        this.props.grapSingleCategoy(this.props.category)
-        this.props.history.push("/category")
+        this.props.history.push(`/categories/${this.props.category.id}`)
     }
     
     render() {
@@ -26,8 +24,5 @@ const mapStateToProps = state => ({
     categories: state.categories
 })
 
-const mapDispatchToProps = dispatch => ({
-    grapSingleCategoy: (singleCategory) => dispatch(grapSingleCategoy(singleCategory))
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryList)
+export default connect(mapStateToProps)(CategoryList)

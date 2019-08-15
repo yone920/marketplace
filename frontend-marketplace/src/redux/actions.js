@@ -59,6 +59,8 @@ export const getProfileFetch = () => {
             .then(res => res.json())
             .then(profileData => {
                 // debugger
+                // console.log(profileData);
+                
                 dispatch(loginUser(profileData))
             })
         }
@@ -87,6 +89,8 @@ export const fetchCategories = () => dispatch => {
         })
 }
 
+
+// fetch all products
 export const fetchProducts = () => dispatch => {
     fetch('http://localhost:3000/products')
         .then(res => res.json())
@@ -97,20 +101,47 @@ export const fetchProducts = () => dispatch => {
 }
 
 
-export const grapSingleCategoy = (singleCategory) => dispatch => {
-    dispatch({ type: "GET_SINGLE_CATEGORY", category: singleCategory })
+// get the product id and fetch for the product
+export const grabSingleProduct = (product_id) => dispatch => {
+    console.log(product_id);
+    fetch(`http://localhost:3000/${product_id}`)
+    .then(res => res.json())
+    .then(ProductJson => {
+        
+        dispatch({ type: "GET_SINGLE_PRODUCT", product: ProductJson})
+        
+    })
+    // dispatch({ type: "GET_SINGLE_PRODUCT", product: singleProduct})
 }
 
 
-export const grabSingleProduct = (singleProduct) => dispatch => {
-    dispatch({ type: "GET_SINGLE_PRODUCT", product: singleProduct})
+
+// get the id from router and fetch for a Category
+export const grabACategory = (category_id) => dispatch => {
+    // dispatch({ type: "GET_SINGLE_CATEGORY", category: singleCategory })
+    console.log(category_id);
+    fetch(`http://localhost:3000/${category_id}`)
+        .then(res => res.json())
+        .then(categoryJson => {
+            
+            dispatch({ type: "GET_SINGLE_CATEGORY", category: categoryJson})
+            
+        })
 }
+// GET_SINGLE_CATEGORY
 
 
-
-
-
-
+// If there is a current user and the curent order is !null fetch for the order and set state
+export const fetchCart = (current_user) => dispatch => {
+   console.log(current_user)
+   
+    // fetch('http://localhost:3000/products')
+    //     .then(res => res.json())
+    //     .then(productsJson => {
+    //         dispatch({ type: "GET_CURRENT_PRODUCTS", products: productsJson})
+            
+    //     })
+}
 
 
 
@@ -124,7 +155,8 @@ export const addToCart = data => dispatch => {
     const productId = data.product.id
     let quantity = data.quantity
 
-
+    console.log(data);
+    
 
     if (currentOrder === null) {
         // Create new Order
@@ -168,3 +200,5 @@ export const addToCart = data => dispatch => {
 
     }
 
+
+    

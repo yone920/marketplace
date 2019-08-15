@@ -11,7 +11,7 @@ class CartItem extends Component {
     render() {        
         return (
             <div>
-                <h5>{this.props.item.name}</h5>
+                {/* <h5>{this.props.item.name}</h5> */}
                 <button onClick={this.handleClick()}>Remove from Cart</button>
             </div>
         )

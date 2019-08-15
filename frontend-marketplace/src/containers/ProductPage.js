@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addToCart } from '../redux/actions';
+import { grabSingleProduct } from '../redux/actions'
 
 class ProductPage extends Component {
 
     state = {
-        product: this.props.product.product,
-        // user: this.props.user,
         quantity: 0
+    }
+
+    componentDidMount() {
+        this.props.grabSingleProduct(this.props.location.pathname)
     }
 
     handleChange = event => {
@@ -16,14 +19,14 @@ class ProductPage extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        this.props.addToCart({...this.state, user: this.props.user})        
+        this.props.addToCart({...this.state, user: this.props.user, product: this.props.product})        
     }
 
     render() {
          
         return (
             <div>
-            <h3>{this.props.product.product.name}</h3>
+            <h3>{this.props.product.name}</h3>
             {/* <button onClick={this.handleClick}>Add To Cart</button> */}
             <form onSubmit={this.handleSubmit}>
                 <button type="submit">Add To Cart</button>
@@ -40,8 +43,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    addToCart: (singleProduct) => dispatch(addToCart(singleProduct))
-
+    addToCart: (singleProduct) => dispatch(addToCart(singleProduct)),
+    grabSingleProduct:(product_id) => dispatch(grabSingleProduct(product_id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)

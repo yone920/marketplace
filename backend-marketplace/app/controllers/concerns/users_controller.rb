@@ -17,7 +17,11 @@ class UsersController < ApplicationController
     end
 
     def profile
-        render json: current_site_user
+        # order = Order.find(current_site_user.current_order)
+        # render json: {user: current_site_user, order: order}
+        render json: user
+
+        # render json: order, include : "**"
     end
     
     def update 

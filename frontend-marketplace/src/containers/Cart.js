@@ -11,7 +11,9 @@ class Cart extends Component {
     }
 
 
-    render() {        
+    render() {  
+        console.log(this.props.cart)
+              
         return (
             <div>
                 <h3>This is Cart</h3>

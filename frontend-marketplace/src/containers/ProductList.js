@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { grabSingleProduct } from '../redux/actions';
+
 
 
 
@@ -9,8 +9,8 @@ class ProductList extends Component {
 
 
     handleClick = () => {
-        this.props.grabSingleProduct(this.props)
-        this.props.history.push("/product")
+        
+        this.props.history.push(`/products/${this.props.product.id}`)
     }
 
     render() {
@@ -28,10 +28,10 @@ class ProductList extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    grabSingleProduct: (singleProduct) => dispatch(grabSingleProduct(singleProduct))
-})
+// const mapDispatchToProps = dispatch => ({
+//     grabSingleProduct: (singleProduct) => dispatch(grabSingleProduct(singleProduct))
+// })
 
 
 
-export default connect(null, mapDispatchToProps)(ProductList);
+export default connect()(ProductList);
