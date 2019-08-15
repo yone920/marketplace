@@ -70,6 +70,13 @@ export const logoutUser = () => ({
     type: 'LOGOUT_USER'
 })
 
+
+
+
+
+
+
+
 // Fetch categories and set the state
 export const fetchCategories = () => dispatch => {
     fetch('http://localhost:3000/categories')
@@ -79,14 +86,6 @@ export const fetchCategories = () => dispatch => {
             
         })
 }
-
-// export const fetchedCategories = () => {
-//     GET_CURRENT_CATEGORIES
-// }
-
-// export const addToCart = (cartData) => dispatch => {
-//     dispatch({ type: 'ADD_TO_CART', data: cartData })
-// }
 
 export const fetchProducts = () => dispatch => {
     fetch('http://localhost:3000/products')
@@ -161,7 +160,10 @@ export const addToCart = data => dispatch => {
             
             fetch("http://localhost:3000/order_items", config3)
                 .then(rsp => rsp.json())
-                .then(data => console.log(data)) 
+                .then(data => {
+                    // const order = {...data.order, order_items: data.order_items}
+                    dispatch({ type: "NEW_ORDER", cart: data}) 
+                }) 
         }
 
     }
