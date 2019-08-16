@@ -201,4 +201,28 @@ export const addToCart = data => dispatch => {
     }
 
 
+    // Remove an Item from cart
+    export const removeFromCart = data => dispatch => {
+            console.log(data);
+            const token = localStorage.token
+            let config4 = {
+                method: "DELETE",
+                headers: {
+                'Content-Type':'application/json',
+                'Authorization': token,
+                'Accept':'application/json'
+                }
+            }
+            
+            fetch(`http://localhost:3000/order_items/${data}`, config4)
+                .then(rsp => rsp.json())
+                .then(data => {
+                    console.log(data);
+                    dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}) 
+                    // const order = {...data.order, order_items: data.order_items}
+                    // dispatch({ type: "NEW_ORDER", cart: data}) 
+                }) 
+
+    }
+
     

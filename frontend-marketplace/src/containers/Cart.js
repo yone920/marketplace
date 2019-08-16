@@ -1,30 +1,65 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import CartItem from '../components/CartItem'
+import '../stylesheet/cart.scss'
+
 
 class Cart extends Component {
 
-    mapOverCartItems = () => {        
-        return this.props.cart.map((item) => {
-            return <CartItem history={this.props.history} item={item} />
-        })
+
+    
+    current_order() {
+        if (this.props.user.orders) {
+            return this.props.user.orders.find(order => { 
+                console.log(order)
+                return this.props.user.current_order === order.id
+            })
+        }
     }
 
-
+    
+    mapOverCartItems = () => {   
+        if (this.current_order()) {     
+        return this.current_order().order_items.map((item) => {
+            return <CartItem key={item.id} history={this.props.history} item={item} />
+        })
+    }
+    }
+    
     render() {  
-        console.log(this.props.cart)
-              
+        // const order = this.current_order()
+        // debugger
+        // const order_items = order.order_items
+        // console.log(order_items)
         return (
-            <div>
+            <div className="cart-container">
+                <div className="cart-section">
                 <h3>This is Cart</h3>
-              {this.mapOverCartItems()}
+
+
+                <table className="ui single fixed striped table">
+                    {/* <thead>
+                        <tr>
+                            <th>Task Name</th>
+                            <th>Total Working Hours</th>
+                            <th>Total Work Done</th>
+                            <th>Task Progress</th>
+                            <th>Update Progress</th>
+                        </tr>
+                    </thead> */}
+                    {this.mapOverCartItems()}
+                </table>
+
+
+                    {/* {this.mapOverCartItems()} */}
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    cart: state.cart
+    user: state.current_site_user
 })
 
 

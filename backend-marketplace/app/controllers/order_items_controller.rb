@@ -6,28 +6,25 @@ class OrderItemsController < ApplicationController
         found_item = order_items.detect do |item| 
             order_item_params[:product_id] == item.product_id
         end
-        # byebug
         if found_item
             found_item.quantity += 1
             found_item.save
         else
             orderItem = OrderItem.create(order_item_params)
-            # end
         end
-        # order_items.each do |item|
-        #     if order_item_params[:product_id] == item.product_id
-        #         item.quantity += 1
-        #     else 
-        #         byebug
-        #         orderItem = OrderItem.create(order_item_params)
-        #     end
-        # end
-        # render json: {order: order, order_items: order_items}
+        
         render json: order, include: "**"
-        # , include: "**"
     end
 
+    def destroy
+        order_item = OrderItem.find(params[:id].to_i)
+        order_item.destroy
+        
+        order = Order.find(current_site_user.current_order)
+        # render json: {user: current_site_user, order: order}
+        render json: current_site_user, include: '**'
 
+    end
 
     private
     def order_item_params

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {logoutUser} from '../redux/actions';
 import {connect} from 'react-redux';
 import CategoryList from '../components/CategoryList'
+import '../stylesheet/home.scss'
 
 
 class Home extends Component {
@@ -20,8 +21,14 @@ class Home extends Component {
     
     render() {        
         return (
-            <div>
-                {this.mapOverCategories()}
+            <div className="home-div">
+                <div className="home-categories">
+                <h3>Categories</h3>
+                    {this.mapOverCategories()}
+                </div>
+                <div className="home-products">
+                    <h4>Peodcuts</h4>
+                </div>
             </div>
         )
     }

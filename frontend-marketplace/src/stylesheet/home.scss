@@ -1,0 +1,23 @@
+.home-div {
+    background-color: blue;
+    display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    // justify-content: flex-start;
+    .home-categories {
+        // display: flex;
+        background-color: white;
+        order: 1;
+        flex-grow: 1;
+        // width: 30%;
+    }
+    
+    .home-products {
+        display: flex;
+
+        background-color: orange;
+        // width: 60%;
+        order: 2;
+        flex-grow: 7;
+    }
+}
