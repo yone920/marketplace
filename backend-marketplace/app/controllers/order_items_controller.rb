@@ -8,6 +8,7 @@ class OrderItemsController < ApplicationController
         end
         if found_item
             found_item.quantity += 1
+            found_item += order_item_params[:quantity].to_i
             found_item.save
         else
             orderItem = OrderItem.create(order_item_params)

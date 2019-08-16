@@ -19,8 +19,8 @@ class CategoryList extends Component {
                     <li>{this.props.category.name}</li>
                 </ul> */}
                 
-                <div class="ui secondary vertical pointing menu">
-                    <a key={this.props.category.id} onClick={this.handleClick} class="active item">
+                <div className="ui secondary vertical pointing menu">
+                    <a key={this.props.category.id} onClick={this.handleClick} className="active item">
                     {this.props.category.name}
                     </a>
                 </div>

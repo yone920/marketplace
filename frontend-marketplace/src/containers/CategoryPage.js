@@ -15,7 +15,7 @@ class CategoryPage extends Component {
         mapOverProducts = () => {  
             if  (this.props.category.products) {
             return this.props.category.products.map((product) => {
-                return <ProductList history={this.props.history} product={product} />
+                return <ProductList key={product.id} history={this.props.history} product={product} />
             })
         }
     }
