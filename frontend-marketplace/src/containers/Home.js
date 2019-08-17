@@ -22,13 +22,19 @@ class Home extends Component {
     render() {        
         return (
             <div className="home-div">
-                <div className="home-categories">
-                <h3>Categories</h3>
-                    {this.mapOverCategories()}
+                <div className="home-categories-navbar">
+                    <h3>Heyyyyyy</h3>
                 </div>
-                <div className="home-products">
-                    <h4>Peodcuts</h4>
+                <div className="home-wrapper">
+                    <div className="home-categories">
+                    <h3>Categories</h3>
+                        {this.mapOverCategories()}
+                    </div>
+                    <div className="home-products">
+                        <h4>Peodcuts</h4>
+                    </div>
                 </div>
+                
             </div>
         )
     }

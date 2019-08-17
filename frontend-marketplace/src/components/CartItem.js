@@ -19,7 +19,7 @@ class CartItem extends Component {
                     <td>{this.props.item.product.image}</td>
                     <td>{this.props.item.product.name}</td>
                     <td>Qty: {this.props.item.quantity}</td>
-                    <td>{this.props.item.product.price}</td>
+                    <td>${this.props.item.item_price}</td>
                     <td><button onClick={this.handleClick}>Remove</button></td>
                     </tr>
                 </tbody>

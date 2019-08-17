@@ -17,6 +17,12 @@ class Cart extends Component {
         }
     }
 
+    totalPrice() {
+        if (this.props.user.orders) {
+           return <h3>Total Price: {this.current_order().total_price}</h3>
+        }
+    }
+
     
     mapOverCartItems = () => {   
         if (this.current_order()) {     
@@ -49,7 +55,8 @@ class Cart extends Component {
                     </thead> */}
                     {this.mapOverCartItems()}
                 </table>
-
+                     {this.totalPrice()}
+                   
 
                     {/* {this.mapOverCartItems()} */}
                 </div>

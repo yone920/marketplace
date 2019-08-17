@@ -21,6 +21,7 @@ class ProductList extends Component {
                     <li>
                     {this.props.product.name}
                     </li>
+                  
                 </ul>
                 
             </div>

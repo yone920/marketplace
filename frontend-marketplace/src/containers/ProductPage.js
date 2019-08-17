@@ -27,6 +27,7 @@ class ProductPage extends Component {
         return (
             <div>
             <h3>{this.props.product.name}</h3>
+            <h3>{this.props.product.price_in_cents}</h3>
             {/* <button onClick={this.handleClick}>Add To Cart</button> */}
             <form onSubmit={this.handleSubmit}>
                 <button type="submit">Add To Cart</button>

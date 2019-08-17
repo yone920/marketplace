@@ -36,6 +36,9 @@ class Navbar extends Component {
         this.props.history.push('./cart')
     }
 
+    handleHomeClick = event => {
+        this.props.history.push('./')
+    }
     
 
 
@@ -43,15 +46,16 @@ class Navbar extends Component {
         return (
             <div>
                 <ul className="navbar">
-                    <li><a className="active" href="#home">Home</a></li>
+                    <li><a className="active" onClick={this.handleHomeClick}>Home</a></li>
                     <li><a href="#news">Profile</a></li>
                     {this.loginButton()}
                     {this.signUpButton()}
                     
                     {this.props.current_site_user.name ? <li className="username">Welcome {this.props.current_site_user.name}</li> : null }
                     {this.signOutButton()}
-                    <li><a onClick={this.handleCartClick} href="#news">Cart</a></li>
+                    <li><a onClick={this.handleCartClick} href="#">Cart</a></li>
                 </ul>
+                {/* <div className="categories-nav-bar"></div> */}
             </div>
         )
     }
