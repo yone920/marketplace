@@ -40,25 +40,16 @@ class Cart extends Component {
         return (
             <div className="cart-container">
                 <div className="cart-section">
-                <h3>This is Cart</h3>
-
-
-                <table className="ui single fixed striped table">
-                    {/* <thead>
-                        <tr>
-                            <th>Task Name</th>
-                            <th>Total Working Hours</th>
-                            <th>Total Work Done</th>
-                            <th>Task Progress</th>
-                            <th>Update Progress</th>
-                        </tr>
-                    </thead> */}
-                    {this.mapOverCartItems()}
-                </table>
-                     {this.totalPrice()}
-                   
-
-                    {/* {this.mapOverCartItems()} */}
+                    <h3>My Cart</h3>
+                        {this.mapOverCartItems()}
+                    <div className="cart-summary-div">
+                        <div className="total-price">
+                            {this.totalPrice()}
+                        </div>
+                        <div className="checkout-button">
+                            <button>Checkout</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

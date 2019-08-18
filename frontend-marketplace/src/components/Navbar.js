@@ -7,7 +7,7 @@ class Navbar extends Component {
 
     // Controls login button
     loginButton = () => {
-        return localStorage.token ? null : <li ><a  onClick={this.handleClick}>Login</a></li>;
+        return localStorage.token ? null : <button  onClick={this.handleClick}>Login</button>;
     }
     handleClick = event => {
         this.props.history.push('./login')
@@ -15,7 +15,7 @@ class Navbar extends Component {
 
     // Controls signup button
     signUpButton = () => {
-        return localStorage.token ? null : <li ><a onClick={this.handleSignUpClick}>Signup</a></li>;
+        return localStorage.token ? null : <button  onClick={this.handleSignUpClick}>Signup</button> ;
     }
     handleSignUpClick = event => {
         this.props.history.push('./signup')
@@ -23,7 +23,8 @@ class Navbar extends Component {
 
     // Controls logout button
     signOutButton = () => {
-        return localStorage.token ? <li ><a onClick={this.handleSignOutClick}>SignOut</a></li> : null ;
+        return localStorage.token ?  <button  onClick={this.handleSignOutClick}>SignOut</button>
+     : null ;
     }
     handleSignOutClick = event => {
         localStorage.clear()
@@ -44,17 +45,20 @@ class Navbar extends Component {
 
     render() {
         return (
-            <div>
-                <ul className="navbar">
-                    <li><a className="active" onClick={this.handleHomeClick}>Home</a></li>
-                    <li><a href="#news">Profile</a></li>
+            <div className="navbar">
+                {/* <ul className="navbar"> */}
+                    {/* <li><a href=""> className="active" onClick={this.handleHomeClick}>Home</a></ li> */}
+                    <button className="active" onClick={this.handleHomeClick}>Homee</button>
+                    {/* <li><a href="">Profile</a></li> */}
                     {this.loginButton()}
                     {this.signUpButton()}
                     
-                    {this.props.current_site_user.name ? <li className="username">Welcome {this.props.current_site_user.name}</li> : null }
+                    {this.props.current_site_user.name ? <p className="username">Welcome {this.props.current_site_user.name}</p> : null }
                     {this.signOutButton()}
-                    <li><a onClick={this.handleCartClick} href="#">Cart</a></li>
-                </ul>
+                    {/* <li><a href=""> onClick={this.handleCartClick} href="#">Cart</a></li> */}
+                    <button onClick={this.handleCartClick} >Cartt</button>
+
+                {/* </ul> */}
                 {/* <div className="categories-nav-bar"></div> */}
             </div>
         )

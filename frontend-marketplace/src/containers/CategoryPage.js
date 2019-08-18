@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import '../stylesheet/navbar.scss'
-import ProductList from './ProductList'
+// import ProductList from './ProductList'
 import { grabACategory } from '../redux/actions';
+import ProductCard from '../components/ProductCard';
+import '../stylesheet/category.scss'
 
 
 class CategoryPage extends Component {
@@ -15,7 +17,7 @@ class CategoryPage extends Component {
         mapOverProducts = () => {  
             if  (this.props.category.products) {
             return this.props.category.products.map((product) => {
-                return <ProductList key={product.id} history={this.props.history} product={product} />
+                return <ProductCard key={product.id} history={this.props.history} product={product} />
             })
         }
     }
@@ -24,8 +26,22 @@ class CategoryPage extends Component {
     render() {  
               
         return (
-            <div>
-                {this.mapOverProducts()}
+            <div className="featured-products category-page">
+            <div className="featured-header">
+                    <h1>{this.props.category.name}</h1>
+                </div>
+                <div className="featured-header">
+                   
+                </div>
+                <div className="home-products">
+                    <main className="main-area">
+                        <div className="centered">
+                            <section className="cards">
+                                {this.mapOverProducts()}
+                            </section>
+                        </div>
+                    </main>
+                </div>
             </div>
         )
     }

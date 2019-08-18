@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import '../stylesheet/navbar.scss'
-import { Menu } from 'semantic-ui-react'
 
 
 class CategoryList extends Component {
@@ -20,7 +19,7 @@ class CategoryList extends Component {
                 </ul> */}
                 
                 <div className="ui secondary vertical pointing menu">
-                    <a key={this.props.category.id} onClick={this.handleClick} className="active item">
+                    <a href=" " key={this.props.category.id} onClick={this.handleClick} className="active item">
                     {this.props.category.name}
                     </a>
                 </div>

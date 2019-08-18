@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {logoutUser} from '../redux/actions';
 import {connect} from 'react-redux';
 import CategoryList from '../components/CategoryList'
+import ProductCard  from '../components/ProductCard'
 import '../stylesheet/home.scss'
 
 
@@ -17,9 +18,20 @@ class Home extends Component {
     }
     }
 
+    mapOverProducts = () => {
+        if (this.props.current_site_user.products) {
+            return this.props.current_site_user.products.map((product) => {
+                if (product.featured ) {
+                    return <ProductCard key={product.id} history={this.props.history} product={product} />
+                }
+            }) 
+        }
+    }
    
     
-    render() {        
+    render() {     
+        console.log(this.props.current_site_user.products);
+           
         return (
             <div className="home-div">
                 <div className="home-categories-navbar">
@@ -30,11 +42,24 @@ class Home extends Component {
                     <h3>Categories</h3>
                         {this.mapOverCategories()}
                     </div>
-                    <div className="home-products">
-                        <h4>Peodcuts</h4>
+                    <div className="featured-products">
+                    <div className="featured-header">
+                            <h1>Your Favourite Books Store</h1>
+                        </div>
+                        <div className="featured-header">
+                            <h3>Feature Products</h3>
+                        </div>
+                        <div className="home-products">
+                            <main className="main-area">
+                                <div className="centered">
+                                    <section className="cards">
+                                        {this.mapOverProducts()}
+                                    </section>
+                                </div>
+                            </main>
+                        </div>
                     </div>
-                </div>
-                
+            </div>
             </div>
         )
     }

@@ -9,10 +9,11 @@ require 'faker'
 
 Product.destroy_all
 Category.destroy_all
+User.destroy_all
 
 
 40.times do
-    Product.create(name: Faker::Book.title, description: Faker::Lorem.paragraph(sentence_count: 7), price: rand(1..200), main_image: Faker::Commerce.department, quantity: rand(20..50), featured: [true, false].sample )
+    Product.create(name: Faker::Book.title, description: Faker::Lorem.paragraph(sentence_count: 7), price: rand(1..200), main_image: rand(1..40), image_two: rand(1..40), image_three: rand(1..40), quantity: rand(20..50), sale: [true, false].sample, featured: [true, false].sample )
 end
   puts "happy Product seeding"
 

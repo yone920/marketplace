@@ -7,7 +7,7 @@
     // justify-content: center;
     // width: 80%;
     .home-categories-navbar {
-        background-color: purple;
+        // background-color: purple;
         padding: 30px;
         margin-bottom: 20px;
     }
@@ -22,15 +22,32 @@
         
         
         .home-categories {
-            background-color: blue;
-            flex: 1;
-
-           
+            // background-color: blue;
+            flex: 1; 
         } 
-        .home-products {
-            background-color: orange;
+
+        .featured-products {
+            display: flex;
+            flex-direction: column;
             flex: 4;
 
+            .featured-header {
+                // background-color: pink;
+            }
+
+            .home-products {
+                display: flex;
+                // width: 50%;
+                // flex: 4;
+                // background-color: yellow;
+                flex-direction: column;
+    
+                // .product-card-container {
+                //     display: flex;
+                //     background-color: yellow;
+                //     flex-direction: column;
+                // }
+            }
         }
     }
 }

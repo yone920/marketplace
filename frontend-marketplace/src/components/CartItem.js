@@ -9,24 +9,37 @@ class CartItem extends Component {
         this.props.removeFromCart(this.props.item.id)
     }
 
+    returnImage = () => {
+        return `../img/${parseInt(this.props.item.product.main_image)}.jpg`
+    }
+
     render() {    
         console.log(this.props)
             
         return (
             <Fragment>
-                <tbody >
-                    <tr key={this.props.item.id}>
-                    <td>{this.props.item.product.image}</td>
-                    <td>{this.props.item.product.name}</td>
-                    <td>Qty: {this.props.item.quantity}</td>
-                    <td>${this.props.item.item_price}</td>
-                    <td><button onClick={this.handleClick}>Remove</button></td>
-                    </tr>
-                </tbody>
+                <div key={this.props.item.id} className="cart-item">
+                    <div className="cart-item-image">
+                        <img src={this.returnImage()} alt="A banana that looks like a bird"></img>
+                    </div>
+                    <div className="cart-item-details">
+                        <div className="cart-item-name">
+                            <h3>{this.props.item.product.name}</h3>
+                        </div>
+                        <div cart-item-remove>
+                            <button onClick={this.handleClick}>Remove</button>
+                        </div>
+                    </div>
+                    <div className="cart-item-price-qty">
+                        <div className="cart-item-price">
+                            <h2>${this.props.item.item_price}</h2>
+                        </div>
+                        <div className="cart-item-qty">
+                            <p>Qty: {this.props.item.quantity}</p>
+                        </div>
+                    </div>
+                </div>
             </Fragment>
-            //     <h5>{this.props.item.product.name}</h5>
-            //     <button onClick={this.handleClick()}>Remove from Cart</button>
-            // </div>
         )
     }
 }

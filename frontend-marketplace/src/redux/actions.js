@@ -53,7 +53,7 @@ export const getProfileFetch = () => {
         if (token) {
             fetch('http://localhost:3000/profile', {
                 headers: {
-                    Authorization: token
+                    "Authorization": token
                 }
             })
             .then(res => res.json())
