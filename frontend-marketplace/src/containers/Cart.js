@@ -6,8 +6,6 @@ import '../stylesheet/cart.scss'
 
 class Cart extends Component {
 
-
-    
     current_order() {
         if (this.props.user.orders) {
             return this.props.user.orders.find(order => { 
@@ -23,13 +21,16 @@ class Cart extends Component {
         }
     }
 
-    
     mapOverCartItems = () => {   
         if (this.current_order()) {     
         return this.current_order().order_items.map((item) => {
             return <CartItem key={item.id} history={this.props.history} item={item} />
         })
     }
+    }
+
+    handleClick = () => {
+        this.props.history.push('/shpping-address')
     }
     
     render() {  
@@ -47,7 +48,7 @@ class Cart extends Component {
                             {this.totalPrice()}
                         </div>
                         <div className="checkout-button">
-                            <button>Checkout</button>
+                            <button onClick={this.handleClick}>Next</button>
                         </div>
                     </div>
                 </div>

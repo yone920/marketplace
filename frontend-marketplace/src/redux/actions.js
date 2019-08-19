@@ -120,7 +120,7 @@ export const grabSingleProduct = (product_id) => dispatch => {
 export const grabACategory = (category_id) => dispatch => {
     // dispatch({ type: "GET_SINGLE_CATEGORY", category: singleCategory })
     console.log(category_id);
-    fetch(`http://localhost:3000/${category_id}`)
+    fetch(`http://localhost:3000/categories/${category_id}`)
         .then(res => res.json())
         .then(categoryJson => {
             
@@ -132,15 +132,15 @@ export const grabACategory = (category_id) => dispatch => {
 
 
 // If there is a current user and the curent order is !null fetch for the order and set state
-export const fetchCart = (current_user) => dispatch => {
+export const fetchCart = current_user => dispatch => {
    console.log(current_user)
    
-    // fetch('http://localhost:3000/products')
-    //     .then(res => res.json())
-    //     .then(productsJson => {
-    //         dispatch({ type: "GET_CURRENT_PRODUCTS", products: productsJson})
+    fetch('http://localhost:3000/products')
+        .then(res => res.json())
+        .then(productsJson => {
+            dispatch({ type: "GET_CURRENT_PRODUCTS", products: productsJson})
             
-    //     })
+        })
 }
 
 
@@ -203,26 +203,75 @@ export const addToCart = data => dispatch => {
 
     // Remove an Item from cart
     export const removeFromCart = data => dispatch => {
-            console.log(data);
-            const token = localStorage.token
-            let config4 = {
-                method: "DELETE",
-                headers: {
+        const token = localStorage.token
+        let config4 = {
+            method: "DELETE",
+            headers: {
                 'Content-Type':'application/json',
                 'Authorization': token,
                 'Accept':'application/json'
-                }
             }
-            
-            fetch(`http://localhost:3000/order_items/${data}`, config4)
-                .then(rsp => rsp.json())
-                .then(data => {
-                    console.log(data);
-                    dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}) 
-                    // const order = {...data.order, order_items: data.order_items}
-                    // dispatch({ type: "NEW_ORDER", cart: data}) 
-                }) 
-
+        }
+        
+        fetch(`http://localhost:3000/order_items/${data}`, config4)
+        .then(rsp => rsp.json())
+        .then(data => {
+            console.log(data);
+            dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}) 
+            // const order = {...data.order, order_items: data.order_items}
+            // dispatch({ type: "NEW_ORDER", cart: data}) 
+        }) 
+        
     }
-
     
+    
+    
+    export const addShippingAddressToCurrentOrder = data => dispatch => {
+        console.log(data);
+        const token = localStorage.token
+
+        let config6 = {
+            method: "PATCH",
+            headers: {
+            'Content-Type':'application/json',
+            'Authorization': token,
+            'Accept':'application/json'
+            },
+            body: JSON.stringify({fname: data.fname, 
+                                                address: data.address, 
+                                                city: data.city,
+                                                state: data.state,
+                                                zip: data.zip })
+        }
+        
+        fetch(`http://localhost:3000/orders/${data.current_order}`, config6)
+            .then(rsp => rsp.json())
+            .then(data => {
+                console.log(data);
+                dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data})
+            }) 
+    }
+        
+    
+    export const updateShippingRate = data => dispatch => {
+        console.log(data);
+        
+        const token = localStorage.token
+
+        // let config6 = {
+        //     method: "PATCH",
+        //     headers: {
+        //     'Content-Type':'application/json',
+        //     'Authorization': token,
+        //     'Accept':'application/json'
+        //     },
+        //     body: JSON.stringify({sh_rate: data.value })
+        // }
+        
+        // fetch(`http://localhost:3000/orders/${data.current_order}`, config6)
+        //     .then(rsp => rsp.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data})
+        //     }) 
+    }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import '../stylesheet/navbar.scss'
-// import ProductList from './ProductList'
 import { grabACategory } from '../redux/actions';
 import ProductCard from '../components/ProductCard';
 import '../stylesheet/category.scss'
@@ -10,7 +9,7 @@ import '../stylesheet/category.scss'
 class CategoryPage extends Component {
 
     componentDidMount() {
-            this.props.grabACategory(this.props.location.pathname)
+            this.props.grabACategory(this.props.match.params.id)
         }
         
         
@@ -24,6 +23,7 @@ class CategoryPage extends Component {
     
     
     render() {  
+              console.log(this.props);
               
         return (
             <div className="featured-products category-page">

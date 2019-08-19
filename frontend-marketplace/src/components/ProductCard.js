@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import '../stylesheet/product_card.scss'
 
 class ProductCard extends Component {
@@ -26,7 +27,7 @@ class ProductCard extends Component {
 
         return (
                 <article className="card" >
-                    <a href=" " onClick={this.handleClick}>
+                    <Link href=" " onClick={this.handleClick}>
                         <picture className="thumbnail">
                             <img src={this.returnImage()} alt="A banana that looks like a bird"></img>
                         </picture>
@@ -37,7 +38,7 @@ class ProductCard extends Component {
                             <h2>${this.props.product.price_in_cents}</h2>
                             {this.addToCartButton()}
                         </div>
-                    </a>
+                    </Link>
                 </article>
         )
     }

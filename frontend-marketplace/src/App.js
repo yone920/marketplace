@@ -14,6 +14,7 @@ import OhhPageNotFount from './components/OhhPageNotFount'
 import { connect } from 'react-redux'
 import {getProfileFetch, fetchCategories, fetchProducts, fetchCart} from './redux/actions';
 import Navbar from './components/Navbar';
+import ShippingAddress from './components/ShippingAddress';
 
 class App extends Component {
   componentDidMount() {
@@ -26,7 +27,7 @@ class App extends Component {
 }
 
   render() {    
-    console.log(this.props.current_user);
+    // console.log(this.props.current_user);
     
     return (
         <Fragment>
@@ -37,7 +38,7 @@ class App extends Component {
           {/* <Route path='/login' component={Login}/> */}
 
           <Route 
-            path='/login' 
+            exact path = '/login'
             render={(routerProps) => {
               return (
                 <Login 
@@ -49,7 +50,7 @@ class App extends Component {
           />
 
           <Route 
-            path='/profile' 
+            exact path = '/profile'
             render={(routerProps) => {
               return (
                 <Profile 
@@ -60,10 +61,14 @@ class App extends Component {
             }}
           />
 
-          <Route path='/signup' component={SignUp} />
+          < Route exact path = '/signup'
+          component = {
+            SignUp
+          }
+          />
 
           <Route 
-            path='/categories' 
+            exact path='/categories/:id' 
             render={(routerProps) => {
               return (
                 <CategoryPage 
@@ -75,8 +80,9 @@ class App extends Component {
           />
 
 
+
           <Route 
-            path='/products' 
+            exact path = '/products/:id'
             render={(routerProps) => {
               return (
                 <ProductPage 
@@ -89,7 +95,7 @@ class App extends Component {
 
 
           <Route 
-            path='/cart' 
+            exact path='/cart' 
             render={(routerProps) => {
               return (
                 <CartList
@@ -100,8 +106,22 @@ class App extends Component {
             }}
           />
 
-          <Route path='/checkout' component={CheckOut} />
-          <Route path='/report' component={ReportPage} />
+          < Route exact path = '/shpping-address' 
+            component = {
+              ShippingAddress
+            }
+          />
+
+          < Route exact path = '/checkout'
+          component = {
+            CheckOut
+          }
+          />
+          < Route exact path = '/report'
+          component = {
+            ReportPage
+          }
+          />
 
           <Route exact
             path='/' 

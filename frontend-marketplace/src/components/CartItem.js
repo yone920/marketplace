@@ -26,7 +26,7 @@ class CartItem extends Component {
                         <div className="cart-item-name">
                             <h3>{this.props.item.product.name}</h3>
                         </div>
-                        <div cart-item-remove>
+                        <div className="cart-item-remove">
                             <button onClick={this.handleClick}>Remove</button>
                         </div>
                     </div>

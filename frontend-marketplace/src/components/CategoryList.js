@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom'
 import '../stylesheet/navbar.scss'
 
 
@@ -19,9 +20,9 @@ class CategoryList extends Component {
                 </ul> */}
                 
                 <div className="ui secondary vertical pointing menu">
-                    <a href=" " key={this.props.category.id} onClick={this.handleClick} className="active item">
+                    <Link href=" " key={this.props.category.id} onClick={this.handleClick} className="active item">
                     {this.props.category.name}
-                    </a>
+                    </Link>
                 </div>
 
             </div>

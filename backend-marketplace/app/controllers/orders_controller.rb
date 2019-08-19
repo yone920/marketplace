@@ -29,8 +29,26 @@ class OrdersController < ApplicationController
         render json: {user: user, order: order, order_items: order_items}
     end
 
+    def update
+        # order_id = params[:id].to_i
+        # byebug
+        order = Order.find(params[:id].to_i)
+        order.update(
+                sh_fname: order_params[:fname],
+                sh_address: order_params[:address],
+                sh_city: order_params[:city],
+                sh_state: order_params[:state],
+                sh_zip: order_params[:zip]
+        )
+        # order.save
+
+        render json: current_site_user, include: '**'
+    end
+
     private
     def order_params
-        params.permit(:user_id, :product_id)
+        params.permit(:user_id, :product_id, :fname, :address, :city, :state, :zip, :order_id)
     end
+
+
 end
