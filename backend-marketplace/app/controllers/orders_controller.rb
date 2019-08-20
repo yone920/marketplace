@@ -36,6 +36,8 @@ class OrdersController < ApplicationController
             sh_rate: order_params[:sh_rate],     
         )
 
+        ReportMailer.order_confirmation(current_site_user).deliver
+
         render json: current_site_user, include: '**'
     end
 

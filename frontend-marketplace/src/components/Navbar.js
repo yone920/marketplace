@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {logoutUser} from '../redux/actions';
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import CategoryList from '../components/CategoryList'
+
 
 class Navbar extends Component {
 
@@ -43,21 +45,33 @@ class Navbar extends Component {
     }
     
 
+    mapOverCategories = () => {   
+        if  (this.props.categories.categories) { 
+        return this.props.categories.categories.map((category) => {
+            return <CategoryList key={category.id} history={this.props.history} category={category} />
+        })
+    }
+    }
 
     render() {
         return (
             <div className="navbar2">
-                <ul>
-                    <li><Link onClick={this.handleHomeClick}>Home</Link></li>
-                    {this.loginButton()}
-                    {this.signUpButton()}
-                    {this.signOutButton()}
-                    {/* <li><a href="#news">News</a></li>
-                    <li><a href="#contact">Contact</a></li> */}
-                    {this.props.current_site_user.name ? <li><Link  className="username" href=" ">Welcome {this.props.current_site_user.name}</Link></li> : null }
-                    {/* <li><a href=" " onClick={this.handleHomeClick}>Home</a></li> */}
-                    <li><Link className=""  onClick={this.handleCartClick}>Cart</Link></li>
-                </ul>
+                <div className="top-nav-ul">
+                    <ul>
+                        <li><Link onClick={this.handleHomeClick}>Home</Link></li>
+                        {this.loginButton()}
+                        {this.signUpButton()}
+                        {this.signOutButton()}
+                        {/* <li><a href="#news">News</a></li>
+                        <li><a href="#contact">Contact</a></li> */}
+                        {this.props.current_site_user.name ? <li><Link  className="username" href=" ">Welcome {this.props.current_site_user.name}</Link></li> : null }
+                        {/* <li><a href=" " onClick={this.handleHomeClick}>Home</a></li> */}
+                        <li><Link className=""  onClick={this.handleCartClick}>Cart</Link></li>
+                    </ul>
+                </div>
+                <div className="home-categories-navbar">
+                    {this.mapOverCategories()}
+                </div>
             </div>
         )
     }
@@ -65,7 +79,8 @@ class Navbar extends Component {
 
 
 const mapStateToProps = state => ({
-    current_site_user: state.current_site_user
+    current_site_user: state.current_site_user,
+    categories: state.categories
 })
 
 const mapDispatchToProps = dispatch => ({

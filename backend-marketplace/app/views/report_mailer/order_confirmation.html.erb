@@ -1,0 +1,29 @@
+
+<h3>Dear <%= @user.name %></h3>
+
+<p>Thank you for choosing Access Lab Books Shop.</p>
+
+
+<h4>Order details:</h4>
+
+<% @user.orders.each do |order| %>
+        <% order.id == @user.current_order %>
+        <% order.order_items.each do |item| %>
+          <p><%= item.product.name %>  ------  Qty: <%= item.quantity %></p>
+        <% end %> 
+<% end %>
+
+<hr>
+<br>
+
+<% @user.orders.each do |order| %>
+  <% order.id == @user.current_order %>
+    <p>Price: <%= order.total_price %></p>
+    <p>Shipping: <%= order.sh_rate %></p>
+    <h3>Total: <%= order.sh_rate + order.total_price %></h3>
+<% end %>
+
+
+<p>Thank you for your order.</p>
+<p>Access Lab Book Store</p>
+

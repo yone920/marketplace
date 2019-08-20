@@ -9,11 +9,18 @@ import '../stylesheet/category.scss'
 class CategoryPage extends Component {
 
     componentDidMount() {
+        this.props.grabACategory(this.props.match.params.id)
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.match.params.id !== prevProps.match.params.id){
             this.props.grabACategory(this.props.match.params.id)
         }
+    }
+
         
         
-        mapOverProducts = () => {  
+    mapOverProducts = () => {  
             if  (this.props.category.products) {
             return this.props.category.products.map((product) => {
                 return <ProductCard key={product.id} history={this.props.history} product={product} />

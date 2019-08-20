@@ -34,20 +34,18 @@ class Home extends Component {
            
         return (
             <div className="home-div">
-                <div className="home-categories-navbar">
-                    <h3>Heyyyyyy</h3>
-                </div>
+               
                 <div className="home-wrapper">
                     <div className="home-categories">
                     <h3>Categories</h3>
                         {this.mapOverCategories()}
                     </div>
                     <div className="featured-products">
-                    <div className="featured-header">
+                        <div className="site-name">
                             <h1>Your Favourite Books Store</h1>
-                        </div>
-                        <div className="featured-header">
-                            <h3>Feature Products</h3>
+                            <div className="featured-header">
+                                <h3>Feature Products</h3>
+                            </div>
                         </div>
                         <div className="home-products">
                             <main className="main-area">
