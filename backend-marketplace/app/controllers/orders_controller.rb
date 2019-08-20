@@ -29,6 +29,16 @@ class OrdersController < ApplicationController
         render json: {user: user, order: order, order_items: order_items}
     end
 
+    def shipping
+        # byebug
+        order = Order.find(params[:id].to_i)
+        order.update(
+            sh_rate: order_params[:sh_rate],     
+        )
+
+        render json: current_site_user, include: '**'
+    end
+
     def update
         # order_id = params[:id].to_i
         # byebug
@@ -47,7 +57,7 @@ class OrdersController < ApplicationController
 
     private
     def order_params
-        params.permit(:user_id, :product_id, :fname, :address, :city, :state, :zip, :order_id)
+        params.permit(:user_id, :product_id, :fname, :address, :city, :state, :zip, :order_id, :sh_rate)
     end
 
 

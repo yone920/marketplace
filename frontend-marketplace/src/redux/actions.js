@@ -180,11 +180,13 @@ export const addToCart = data => dispatch => {
             }) 
     } else {
         console.log("current order  else",  currentOrder);
-            
+        const token = localStorage.token
+
             let config3 = {
                 method: "POST",
                 headers: {
                 'Content-Type':'application/json',
+                "Authorization": token,
                 'Accept':'application/json'
                 },
                 body: JSON.stringify({order_id: currentOrder, product_id: productId, quantity: quantity})
@@ -195,6 +197,8 @@ export const addToCart = data => dispatch => {
                 .then(data => {
                     // const order = {...data.order, order_items: data.order_items}
                     dispatch({ type: "NEW_ORDER", cart: data}) 
+                    dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}) 
+
                 }) 
         }
 
@@ -258,20 +262,20 @@ export const addToCart = data => dispatch => {
         
         const token = localStorage.token
 
-        // let config6 = {
-        //     method: "PATCH",
-        //     headers: {
-        //     'Content-Type':'application/json',
-        //     'Authorization': token,
-        //     'Accept':'application/json'
-        //     },
-        //     body: JSON.stringify({sh_rate: data.value })
-        // }
+        let config6 = {
+            method: "PATCH",
+            headers: {
+            'Content-Type':'application/json',
+            'Authorization': token,
+            'Accept':'application/json'
+            },
+            body: JSON.stringify({sh_rate: data.value })
+        }
         
-        // fetch(`http://localhost:3000/orders/${data.current_order}`, config6)
-        //     .then(rsp => rsp.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data})
-        //     }) 
+        fetch(`http://localhost:3000/orders/shipping/${data.current_order}`, config6)
+            .then(rsp => rsp.json())
+            .then(data => {
+                console.log(data);
+                dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data})
+            }) 
     }

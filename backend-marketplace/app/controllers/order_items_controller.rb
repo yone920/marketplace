@@ -14,6 +14,7 @@ class OrderItemsController < ApplicationController
             # order.total_price += found_item.item_price
             # order.save
             # byebug
+
         else
             orderItem = OrderItem.create(order_item_params)
             orderItem.item_price = orderItem.quantity * orderItem.product.price_in_cents
@@ -29,7 +30,9 @@ class OrderItemsController < ApplicationController
         order.save
         
         # byebug
-        render json: order, include: "**"
+        # render json: order, include: "**"
+        render json: current_site_user, include: '**'
+
     end
 
     def destroy

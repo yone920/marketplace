@@ -18,6 +18,7 @@ class CheckOut extends Component {
 
     handleClick = event => {
         this.props.updateShippingRate({...this.state, current_order: this.props.user.current_order})
+        this.props.history.push('/report')
     }
 
     current_order() {

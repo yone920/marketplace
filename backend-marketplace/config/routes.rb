@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#profile'
 
   post 'orders/neworder', to: 'orders#neworder'
+  patch 'orders/shipping/:id', to: 'orders#shipping'
 end
