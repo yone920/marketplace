@@ -4,7 +4,7 @@ import {logoutUser} from '../redux/actions';
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import CategoryList from '../components/CategoryList'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Navbar extends Component {
 
@@ -26,7 +26,7 @@ class Navbar extends Component {
 
     // Controls logout button
     signOutButton = () => {
-        return localStorage.token ?      <li><Link href=" " onClick={this.handleSignOutClick}>SignOut</Link></li>
+        return localStorage.token ?      <li className="signout"><Link href=" " onClick={this.handleSignOutClick}>SignOut</Link></li>
      : null ;
     }
     handleSignOutClick = event => {
@@ -53,7 +53,27 @@ class Navbar extends Component {
     }
     }
 
+
+
+    current_order() {
+        if (this.props.current_site_user.orders) {
+            return this.props.current_site_user.orders.find(order => { 
+                return this.props.current_site_user.current_order === order.id
+            })
+        }
+    }
+
+    cartItemQty = () => {
+        let tot_qty = 0
+        if (this.props.current_site_user.orders) { this.current_order().order_items.map((item) =>  tot_qty += item.quantity)}
+        return tot_qty 
+    }
+
+
+
     render() {
+        console.log(this.cartItemQty());
+        
         return (
             <div className="navbar2">
                 <div className="top-nav-ul">
@@ -61,12 +81,9 @@ class Navbar extends Component {
                         <li><Link onClick={this.handleHomeClick}>Home</Link></li>
                         {this.loginButton()}
                         {this.signUpButton()}
-                        {this.signOutButton()}
-                        {/* <li><a href="#news">News</a></li>
-                        <li><a href="#contact">Contact</a></li> */}
                         {this.props.current_site_user.name ? <li><Link  className="username" href=" ">Welcome {this.props.current_site_user.name}</Link></li> : null }
-                        {/* <li><a href=" " onClick={this.handleHomeClick}>Home</a></li> */}
-                        <li><Link className=""  onClick={this.handleCartClick}>Cart</Link></li>
+                        <li className="cart-icon"><Link className=""  onClick={this.handleCartClick}> <FontAwesomeIcon icon="shopping-cart"/> {this.cartItemQty()}</Link></li>
+                        {this.signOutButton()}
                     </ul>
                 </div>
                 <div className="home-categories-navbar">

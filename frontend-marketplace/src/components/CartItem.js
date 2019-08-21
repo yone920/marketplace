@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import { removeFromCart } from '../redux/actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class CartItem extends Component {
@@ -24,10 +25,10 @@ class CartItem extends Component {
                     </div>
                     <div className="cart-item-details">
                         <div className="cart-item-name">
-                            <h3>{this.props.item.product.name}</h3>
+                            <h4>{this.props.item.product.name}</h4>
                         </div>
                         <div className="cart-item-remove">
-                            <button onClick={this.handleClick}>Remove</button>
+                            <span onClick={this.handleClick}><FontAwesomeIcon icon="times"/></span>
                         </div>
                     </div>
                     <div className="cart-item-price-qty">

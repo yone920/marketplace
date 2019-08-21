@@ -12,6 +12,7 @@ class CategoryPage extends Component {
         this.props.grabACategory(this.props.match.params.id)
     }
 
+
     componentDidUpdate(prevProps, prevState) {
         if(this.props.match.params.id !== prevProps.match.params.id){
             this.props.grabACategory(this.props.match.params.id)
@@ -34,7 +35,7 @@ class CategoryPage extends Component {
               
         return (
             <div className="featured-products category-page">
-            <div className="featured-header">
+            <div className="category-header">
                     <h1>{this.props.category.name}</h1>
                 </div>
                 <div className="featured-header">

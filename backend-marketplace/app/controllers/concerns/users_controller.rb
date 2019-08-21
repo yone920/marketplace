@@ -35,6 +35,15 @@ class UsersController < ApplicationController
         user.save
         render json: user
     end
+
+    def order_complete
+        # user = User.find_by(id: params[:id])
+        # user.current_order = 0
+        # user.save
+
+        render json: current_site_user, include: '**'
+        # byebug
+    end
     
     private
     def user_params

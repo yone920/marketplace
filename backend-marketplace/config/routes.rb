@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 
   post 'orders/neworder', to: 'orders#neworder'
   patch 'orders/shipping/:id', to: 'orders#shipping'
+  patch 'users/order_complete/:id', to: 'users#order_complete'
 end

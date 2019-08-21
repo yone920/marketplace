@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import '../stylesheet/checkout.scss'
+import '../stylesheet/shippingRate.scss'
 import { updateShippingRate } from '../redux/actions';
 
 
@@ -51,8 +51,7 @@ class CheckOut extends Component {
                     <h5>Shipping: {this.state.value}</h5>
                     {this.shippingPlusOrderPrice()}
                 </div>
-                <div>
-                </div>
+             
                 <div className="shipping-options">
                     <h5>Choose Shipping Method</h5>
                     <form onSubmit={this.handleSubmit}>

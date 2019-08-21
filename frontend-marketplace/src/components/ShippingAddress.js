@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import '../stylesheet/checkout.scss'
+import '../stylesheet/shippingAddress.scss'
 import { addShippingAddressToCurrentOrder } from '../redux/actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class ShippingAddress extends Component {
@@ -56,9 +57,10 @@ class ShippingAddress extends Component {
                                         <input type="text" id="zip" name="zip" value={this.state.zip} onChange={this.handleChange} placeholder="10001"></input>
                                     </div>
                                 </div>
-                                <div className="checkout-container">
-                                    <div className="checkout-button">
-                                        <input type="submit" value="Next" />
+                               
+                                <div className="next-container">
+                                    <div className="next-button">
+                                        <input type="submit" value="Next" /><FontAwesomeIcon  icon="arrow-right"></FontAwesomeIcon>
                                     </div>
                                 </div>
                             </form>

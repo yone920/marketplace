@@ -279,3 +279,29 @@ export const addToCart = data => dispatch => {
                 dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data})
             }) 
     }
+
+
+
+    export const changeUserCurrentOrderAttToNull = data => dispatch => {
+        console.log(data);
+        const token = localStorage.token
+
+
+        let config7 = {
+            method: "PATCH",
+            headers: {
+            'Content-Type':'application/json',
+            'Authorization': token,
+            'Accept':'application/json'
+            },
+            body: JSON.stringify()
+        }
+        
+        fetch(`http://localhost:3000/users/order_complete/${data}`, config7)
+            .then(rsp => rsp.json())
+            .then(data => {
+                console.log(data);
+                // dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data})
+            }) 
+
+    }

@@ -39,6 +39,7 @@ h2 {
   color: black;
 }
 
+
 p {
 	margin-bottom: 1.5em;
   color: #898989;
@@ -212,7 +213,7 @@ img {
 
 @media screen and (min-width: 60em) {
     .card {
-        max-width: calc(25% - 1em);
+        max-width: calc(20% - 1em);
     }
 }
 
@@ -226,7 +227,6 @@ img {
         max-width: 72em;
     }
 }
-
 
 
 

@@ -6,7 +6,11 @@ $duration: .2s;
 $distance: 8px;
 $easeOutBack: cubic-bezier(0.175, 0.885, 0.320, 1.275);
 
-
+// html, body, #root {
+//     // position: fixed;
+//     width: 100vw;
+//     // bottom: 0;
+// }
 
 
 .home-div {
@@ -14,14 +18,14 @@ $easeOutBack: cubic-bezier(0.175, 0.885, 0.320, 1.275);
     height: auto;
     display: flex;
     flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
-    // width: 80%;
+   
+    padding-bottom: 100px;
     
-
     .home-wrapper div {
     }
     .home-wrapper {
+        min-height:100%;
+        position:relative;
         padding-top: 50px;
         display: flex;
         justify-content: center;
@@ -44,7 +48,9 @@ $easeOutBack: cubic-bezier(0.175, 0.885, 0.320, 1.275);
                         text-transform: uppercase;
                         text-decoration: none;
                         padding-bottom: 8px;
-
+                        svg {
+                            margin-right: 10px;
+                            } 
                         &:before,
                             &:after {
                                 content: '';
@@ -95,16 +101,7 @@ $easeOutBack: cubic-bezier(0.175, 0.885, 0.320, 1.275);
 
             .home-products {
                 display: flex;
-                // width: 50%;
-                // flex: 4;
-                // background-color: yellow;
                 flex-direction: column;
-    
-                // .product-card-container {
-                //     display: flex;
-                //     background-color: yellow;
-                //     flex-direction: column;
-                // }
             }
         }
     }

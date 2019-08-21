@@ -4,9 +4,9 @@ import '../stylesheet/product_card.scss'
 
 class ProductCard extends Component {
 
-    addToCartButton = () => {
-        return localStorage.token ? <button>View Product</button> : <button>View Product</button>;
-    }
+    // addToCartButton = () => {
+    //     return localStorage.token ? <button>View Product</button> : <button>View Product</button>;
+    // }
 
     descriptionSummary = () => {
         let desc = this.props.product.description.slice(0, 20)
@@ -36,7 +36,7 @@ class ProductCard extends Component {
                             <h2>{this.props.product.name}</h2>
                             <p>{this.descriptionSummary()}</p>
                             <h2>${this.props.product.price_in_cents}</h2>
-                            {this.addToCartButton()}
+                            {/* {this.addToCartButton()} */}
                         </div>
                     </Link>
                 </article>

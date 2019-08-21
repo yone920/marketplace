@@ -10,11 +10,17 @@ import ReportPage from './containers/ReportPage'
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './containers/Profile';
+import BookFooter from './components/BookFooter'
 import OhhPageNotFount from './components/OhhPageNotFount'
 import { connect } from 'react-redux'
 import {getProfileFetch, fetchCategories, fetchProducts, fetchCart} from './redux/actions';
 import Navbar from './components/Navbar';
 import ShippingAddress from './components/ShippingAddress';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEnvelope, faKey, faShoppingCart, faBook, faTimes, faArrowRight, faSignInAlt, faUserPlus, faCheck, faAngleDoubleRight, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faEnvelope, faKey, faShoppingCart, faBook, faTimes, faArrowRight, faSignInAlt, faUserPlus, faCheck, faAngleDoubleRight, faAngleDoubleLeft);
 
 class App extends Component {
   componentDidMount() {
@@ -33,6 +39,7 @@ class App extends Component {
         <Fragment>
 
           <Navbar />
+        
         <Switch>
   
           {/* <Route path='/login' component={Login}/> */}
@@ -139,6 +146,7 @@ class App extends Component {
         
           <Route component={OhhPageNotFount} />
         </Switch>
+        <BookFooter />
       </Fragment>
     )
   }

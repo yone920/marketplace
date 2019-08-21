@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import CartItem from '../components/CartItem'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom'
+
 import '../stylesheet/cart.scss'
 
 
@@ -47,9 +50,9 @@ class Cart extends Component {
                         <div className="total-price">
                             {this.totalPrice()}
                         </div>
-                        <div className="checkout-button">
-                            <button onClick={this.handleClick}>Next</button>
-                        </div>
+                        <div><Link onClick={this.handleClick} className="checkout-button">
+                             <span>Next</span><FontAwesomeIcon  icon="arrow-right"></FontAwesomeIcon>
+                            </Link></div>
                     </div>
                 </div>
             </div>

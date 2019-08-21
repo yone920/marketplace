@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import '../stylesheet/report-page.scss'
 import { connect } from 'react-redux';
+import { changeUserCurrentOrderAttToNull } from '../redux/actions';
+
 
 
 class ReportPage extends Component {
@@ -53,9 +55,12 @@ class ReportPage extends Component {
          }
     }
 
-
     handleClick = event => {
         this.props.history.push('/')
+    }
+
+    componentWillUnmount()  {
+        // this.props.changeUserCurrentOrderAttToNull(this.props.user.id)
     }
 
     render() {
@@ -100,4 +105,8 @@ const mapStateToProps = state => ({
     user: state.current_site_user
 })
 
-export default connect(mapStateToProps)(ReportPage)
+const mapDispatchToProps = dispatch => ({
+    changeUserCurrentOrderAttToNull: (user_id) => dispatch(changeUserCurrentOrderAttToNull(user_id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReportPage)
