@@ -171,7 +171,7 @@ export const addToCart = data => dispatch => {
                 "Authorization": token,
                 'Accept':'application/json'
             },
-            body: JSON.stringify({user_id: userId, product_id: productId})
+            body: JSON.stringify({user_id: userId, product_id: productId, quantity: quantity})
         }
         
         fetch("http://localhost:3000/orders/neworder", config4)

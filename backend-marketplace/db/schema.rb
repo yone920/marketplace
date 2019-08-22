@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_154457) do
+ActiveRecord::Schema.define(version: 2019_08_22_121559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_154457) do
     t.string "sh_state"
     t.string "sh_zip"
     t.integer "sh_rate"
+    t.integer "total_qty", default: 0
   end
 
   create_table "product_categories", force: :cascade do |t|

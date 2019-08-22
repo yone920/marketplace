@@ -57,23 +57,31 @@ class Navbar extends Component {
 
     current_order() {
         if (this.props.current_site_user.current_order) {
-            return this.props.current_site_user.orders.find(order => { 
-                return this.props.current_site_user.current_order === order.id
-            })
+            if( this.props.current_site_user.orders) {
+                return this.props.current_site_user.orders.find(order => { 
+                    return this.props.current_site_user.current_order === order.id
+                })
+            }
         }
     }
 
-    cartItemQty = () => {
-        let tot_qty = 0
-        if (this.props.current_site_user.current_order) {
-            this.current_order().order_items.map(item => {
-                 if (item) {
-                 return  this.current_order().order_items.map((item) =>  tot_qty += item.quantity)
+    // cartItemQty = () => {
+    //     let tot_qty = 0
+    //     if (this.props.current_site_user.current_order) {
+    //         this.current_order().order_items.map(item => {
+    //              if (item) {
+    //              return  this.current_order().order_items.map((item) =>  tot_qty += item.quantity)
                 
-                 }
-            })
-    }
-    return tot_qty 
+    //              }
+    //         })
+    // }
+    // return tot_qty 
+    // }
+
+    total_qty = () => {
+        if (this.current_order()) {
+            return this.current_order().total_qty
+        }
     }
 
 
@@ -89,8 +97,7 @@ class Navbar extends Component {
                         {this.loginButton()}
                         {this.signUpButton()}
                         {this.props.current_site_user.name ? <li><Link  className="username" href=" ">Welcome {this.props.current_site_user.name}</Link></li> : null }
-                        <li className="cart-icon"><Link className=""  onClick={this.handleCartClick}> <FontAwesomeIcon icon="shopping-cart"/> {this.cartItemQty()}</Link></li>
-                        <li className="cart-icon"><Link className=""  onClick={this.handleCartClick}> <FontAwesomeIcon icon="shopping-cart"/></Link></li>
+                        <li className="cart-icon"><Link className=""  onClick={this.handleCartClick}> <FontAwesomeIcon icon="shopping-cart"/> {this.total_qty()}</Link></li>
 
                         {this.signOutButton()}
                     </ul>
