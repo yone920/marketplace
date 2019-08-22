@@ -8,4 +8,9 @@ class User < ApplicationRecord
         
     #     debugger 
     # end
+
+    def current_orders
+        # Given the current_order (id), return all the items in that cart
+        []
+    end
 end

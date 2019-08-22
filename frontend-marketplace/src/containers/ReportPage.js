@@ -60,7 +60,7 @@ class ReportPage extends Component {
     }
 
     componentWillUnmount()  {
-        // this.props.changeUserCurrentOrderAttToNull(this.props.user.id)
+        this.props.changeUserCurrentOrderAttToNull(this.props.user.id)
     }
 
     render() {

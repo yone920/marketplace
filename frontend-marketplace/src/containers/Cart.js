@@ -19,8 +19,8 @@ class Cart extends Component {
     }
 
     totalPrice() {
-        if (this.props.user.orders) {
-           return <h3>Total Price: {this.current_order().total_price}</h3>
+        if (this.current_order()) {
+           return <h3>Total Price: ${this.current_order().total_price}</h3>
         }
     }
 

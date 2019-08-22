@@ -26,14 +26,15 @@ class OrdersController < ApplicationController
         user = User.find(order_params[:user_id])
         user.update(current_order: order.id )
         order_items = order.order_items
-        render json: {user: user, order: order, order_items: order_items}
+        render json: current_site_user, include: '**'
+        # render json: {user: user, order: order, order_items: order_items}
     end
 
     def shipping
         # byebug
         order = Order.find(params[:id].to_i)
         order.update(
-            sh_rate: order_params[:sh_rate],     
+            sh_rate: order_params[:sh_rate].to_i,     
         )
 
         ReportMailer.order_confirmation(current_site_user).deliver

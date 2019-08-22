@@ -56,7 +56,7 @@ class Navbar extends Component {
 
 
     current_order() {
-        if (this.props.current_site_user.orders) {
+        if (this.props.current_site_user.current_order) {
             return this.props.current_site_user.orders.find(order => { 
                 return this.props.current_site_user.current_order === order.id
             })
@@ -65,14 +65,21 @@ class Navbar extends Component {
 
     cartItemQty = () => {
         let tot_qty = 0
-        if (this.props.current_site_user.orders) { this.current_order().order_items.map((item) =>  tot_qty += item.quantity)}
-        return tot_qty 
+        if (this.props.current_site_user.current_order) {
+            this.current_order().order_items.map(item => {
+                 if (item) {
+                 return  this.current_order().order_items.map((item) =>  tot_qty += item.quantity)
+                
+                 }
+            })
+    }
+    return tot_qty 
     }
 
 
 
     render() {
-        console.log(this.cartItemQty());
+        // console.log(this.cartItemQty());
         
         return (
             <div className="navbar2">
@@ -83,6 +90,8 @@ class Navbar extends Component {
                         {this.signUpButton()}
                         {this.props.current_site_user.name ? <li><Link  className="username" href=" ">Welcome {this.props.current_site_user.name}</Link></li> : null }
                         <li className="cart-icon"><Link className=""  onClick={this.handleCartClick}> <FontAwesomeIcon icon="shopping-cart"/> {this.cartItemQty()}</Link></li>
+                        <li className="cart-icon"><Link className=""  onClick={this.handleCartClick}> <FontAwesomeIcon icon="shopping-cart"/></Link></li>
+
                         {this.signOutButton()}
                     </ul>
                 </div>

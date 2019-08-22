@@ -161,11 +161,14 @@ export const addToCart = data => dispatch => {
     if (currentOrder === null) {
         // Create new Order
         console.log("current order ",  currentOrder);
-        
+        const token = localStorage.token
+
+
         let config4 = {
             method: "POST",
             headers: {
                 'Content-Type':'application/json',
+                "Authorization": token,
                 'Accept':'application/json'
             },
             body: JSON.stringify({user_id: userId, product_id: productId})
@@ -175,8 +178,8 @@ export const addToCart = data => dispatch => {
             .then(rsp => rsp.json())
             .then(data => {
                 const order = {...data.order, order_items: data.order_items}
-                dispatch({ type: "NEW_ORDER", cart: order}) 
-                dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data.user}) 
+                // dispatch({ type: "NEW_ORDER", cart: order}) 
+                dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}) 
             }) 
     } else {
         console.log("current order  else",  currentOrder);
@@ -196,7 +199,7 @@ export const addToCart = data => dispatch => {
                 .then(rsp => rsp.json())
                 .then(data => {
                     // const order = {...data.order, order_items: data.order_items}
-                    dispatch({ type: "NEW_ORDER", cart: data}) 
+                    // dispatch({ type: "NEW_ORDER", cart: data}) 
                     dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data}) 
 
                 }) 
@@ -300,8 +303,8 @@ export const addToCart = data => dispatch => {
         fetch(`http://localhost:3000/users/order_complete/${data}`, config7)
             .then(rsp => rsp.json())
             .then(data => {
-                console.log(data);
-                // dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data})
+                console.log('Once we\'ve checked out: ', data);
+                dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data})
             }) 
 
     }
