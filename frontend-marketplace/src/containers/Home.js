@@ -28,6 +28,9 @@ class Home extends Component {
         }
     }
    
+    // componentDidMount = () => {
+
+    // }
     
     render() {     
         console.log(this.props.current_site_user.products);

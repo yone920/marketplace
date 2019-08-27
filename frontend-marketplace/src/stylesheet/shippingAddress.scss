@@ -5,7 +5,7 @@
     width: 30%;
     margin: 0 auto;
     margin-top: 80px;
-    min-height: 38vw;
+    min-height: 43vw;
 
     .next-container {
         margin-top: 60px;
@@ -14,6 +14,15 @@
         }
         input {
             padding: 10px;
+        }
+
+        .next-button {
+            display: flex;
+            float: right;
+
+            input {
+                border: none;
+            }
         }
     }
 }

@@ -23,6 +23,8 @@ class ProductPage extends Component {
     }
 
     handleSubmit = event => {
+        // console.log(this.state);
+        
         event.preventDefault()
         localStorage.token ?  this.props.addToCart({...this.state, user: this.props.user, product: this.props.product}) : this.props.history.push('/login');
         this.state.add_to_cart = true
@@ -60,7 +62,7 @@ class ProductPage extends Component {
                 </div>
                 <div onClick={this.handleRightClick} className="right">
                     <FontAwesomeIcon icon="angle-double-right"/>
-                    <p>Proceede to Cart</p>
+                    <p>Proceed to Cart</p>
                 </div>
             </div>
         </div>

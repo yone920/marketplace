@@ -4,7 +4,7 @@ class UsersController < ApplicationController
         user = User.create(user_params)
 
         if user.valid?
-            render json: {token: encode_token(user), user: user}
+            render json: {token: encode_token(user), user: user, include: '**'}
         else
             render json: { errors: ["Wrong email or password!."] }, status: :unprocessable_entity
         end

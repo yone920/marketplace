@@ -65,29 +65,19 @@ class Navbar extends Component {
         }
     }
 
-    // cartItemQty = () => {
-    //     let tot_qty = 0
-    //     if (this.props.current_site_user.current_order) {
-    //         this.current_order().order_items.map(item => {
-    //              if (item) {
-    //              return  this.current_order().order_items.map((item) =>  tot_qty += item.quantity)
-                
-    //              }
-    //         })
-    // }
-    // return tot_qty 
-    // }
 
     total_qty = () => {
         if (this.current_order()) {
+            console.log(this.current_order());
+            
             return this.current_order().total_qty
         }
     }
 
 
 
+
     render() {
-        // console.log(this.cartItemQty());
         
         return (
             <div className="navbar2">

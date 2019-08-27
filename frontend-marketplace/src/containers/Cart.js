@@ -50,7 +50,7 @@ class Cart extends Component {
                         <div className="total-price">
                             {this.totalPrice()}
                         </div>
-                        <div><Link onClick={this.handleClick} className="checkout-button">
+                        <div className="cart-next-div"><Link onClick={this.handleClick} className="checkout-button">
                              <span>Next</span><FontAwesomeIcon  icon="arrow-right"></FontAwesomeIcon>
                             </Link></div>
                     </div>

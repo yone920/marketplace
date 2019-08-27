@@ -25,7 +25,6 @@ const loginUser = userObj => ({
 })
 
 
-
 export const userLoginFetch = user => {    
     return dispatch => {
         return fetch('http://localhost:3000/login', {
@@ -42,6 +41,8 @@ export const userLoginFetch = user => {
                     localStorage.token = data.token
                     dispatch(loginUser(data.user))
                     // this.props.history.goBack()
+                    // dispatch({ type: "UPDATE_CURRENT_USER", current_site_user: data.user}) 
+
                 }
             });
     }

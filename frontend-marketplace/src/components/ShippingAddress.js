@@ -60,7 +60,7 @@ class ShippingAddress extends Component {
                                
                                 <div className="next-container">
                                     <div className="next-button">
-                                        <input type="submit" value="Next" /><FontAwesomeIcon  icon="arrow-right"></FontAwesomeIcon>
+                                        <input type="submit" value="Next" /><FontAwesomeIcon icon="arrow-right"></FontAwesomeIcon>
                                     </div>
                                 </div>
                             </form>
